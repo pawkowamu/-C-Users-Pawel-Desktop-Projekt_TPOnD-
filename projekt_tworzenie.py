@@ -56,3 +56,41 @@ print(f"scikit-learn: {sklearn.__version__}")
 print(f"seaborn: {sns.__version__}")
 print(f"statsmodels: {statsmodels.__version__}")
 
+
+# In[6]:
+
+
+# ustawienie ziarna i czyszczenie
+tf.keras.backend.clear_session()
+tf.random.set_seed(42)
+np.random.seed(42)
+
+
+# In[7]:
+
+
+# wybór tickers'a , tu musi być np. lista rozwijana
+for symbol, name in tickers.items():
+    print(f"Symbol: {symbol} - Name: {name}")
+
+
+# In[8]:
+
+
+# pobranie danych ze strony Yahoo (po testach wpisać np. rok  2000 !
+start = "2004-01-01"
+end = date.today().strftime("%Y-%m-%d")
+ticker = "BZ=F" # możliwość wyboru np 10
+data = yf.download(ticker, start=start, end=end)
+print(data.shape)
+
+
+# In[9]:
+
+
+# Kontrola jakości danych
+print(data.info())
+print(data.describe())
+print('head', data.head(5))
+print('tail', data.tail(5))
+print(type(data))
